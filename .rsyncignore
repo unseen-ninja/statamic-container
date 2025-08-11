@@ -1,0 +1,8 @@
+.editorconfig
+.env
+.env.example
+.gitattributes
+.gitignore
+readme.md
+README.md
+vite.config.js

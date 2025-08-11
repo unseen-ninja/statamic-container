@@ -1,0 +1,38 @@
+# --- Global defaults ---
+* text=auto eol=lf
+
+# --- Laravel / Statamic specific diffs ---
+*.blade.php    diff=html
+*.antlers.html diff=html
+*.css          diff=css
+*.html         diff=html
+*.md           diff=markdown
+*.php          diff=php
+*.js           diff
+*.scss         diff
+*.vue          diff
+*.yml          diff
+*.yaml         diff
+*.json         diff
+
+# --- Binary files (no diff) ---
+*.jpg      binary
+*.jpeg     binary
+*.png      binary
+*.gif      binary
+*.webp     binary
+*.avif     binary
+*.ico      binary
+*.pdf      binary
+*.zip      binary
+*.ttf      binary
+*.woff     binary
+*.woff2    binary
+
+# --- GitHub linguist override ---
+*.antlers.html linguist-language=HTML
+
+# --- Export-ignore rules ---
+/.github         export-ignore
+CHANGELOG.md     export-ignore
+.styleci.yml     export-ignore

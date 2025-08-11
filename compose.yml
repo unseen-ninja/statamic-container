@@ -1,0 +1,55 @@
+services:
+
+  # PHP server and dependencies
+  php:
+    image: bitnami/php-fpm:8.3
+    environment:
+      PHP_MEMORY_LIMIT: 512M
+      PHP_POST_MAX_SIZE: 64M
+      PHP_UPLOAD_MAX_FILESIZE: 64M
+    volumes:
+      - ./:/app:Z
+    networks: [webnet]
+
+  # Composer sidecar
+  composer:
+    image: composer:2
+    working_dir: /app
+    volumes:
+      - ./:/app:Z
+    entrypoint: ["composer"]
+
+  # Caddy serves static files and forwards PHP to php-fpm
+  caddy:
+    image: caddy:2.8-alpine
+    depends_on: [php]
+    ports:
+      - "4321:80"
+    volumes:
+      - ./:/app:Z
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [webnet]
+
+  # Vite / Tailwind dev server
+  node:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app:Z
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=1
+      - CHOKIDAR_INTERVAL=300
+    command: sh -lc "npm install && npm run dev -- --host 0.0.0.0"
+    networks: [webnet]
+    depends_on: [php, caddy]
+
+networks:
+  webnet: {}
+
+volumes:
+  caddy_data:
+  caddy_config:

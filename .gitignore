@@ -1,0 +1,50 @@
+# Laravel / Statamic / Vite standard ignores
+/vendor/
+/node_modules/
+/public/build/
+/public/hot
+/public/static
+/public/storage
+/public/vendor/statamic
+Homestead.json
+Homestead.yaml
+
+# Environment & cache
+/auth.json
+.env
+.env.*
+!.env.example
+.phpactor.json
+.phpunit.cache
+.phpunit.result.cache
+/storage/*.key
+bootstrap/cache/*.php
+/tmp/
+
+# Compiled views, logs, cache, etc.
+*.log
+/storage/*.key
+/storage/pail
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+/storage/logs
+
+# Statamic-specific content you do NOT want in Git
+# Users are stored in content/users by default
+/users/*
+!/users/.gitkeep
+
+# IDE / OS files
+.fleet/
+.idea/
+.nova/
+.vscode/
+.zed/
+*.DS_Store
+Thumbs.db
+
+# container-specific
+/caddy_data/
+/caddy_config/
+/docker/*.log
